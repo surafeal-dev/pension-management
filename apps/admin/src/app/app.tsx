@@ -27,7 +27,7 @@ export function App() {
       </ul>
       <Routes>
         <Route path="/" element={<NxWelcome title="admin" />} />
-        <Route path="/contribution" element={<Contribution />} />
+        <Route path="/contribution/*" element={<Contribution />} />
         <Route path="/finance" element={<Finance />} />
         <Route path="/registration" element={<Registration />} />
       </Routes>
