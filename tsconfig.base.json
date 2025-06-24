@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@pension/ui": ["libs/ui/src/index.ts"],
       "beneficiary/Module": ["apps/beneficiary/src/remote-entry.ts"],
       "contribution/Module": ["apps/contribution/src/remote-entry.ts"],
       "finance/Module": ["apps/finance/src/remote-entry.ts"],
