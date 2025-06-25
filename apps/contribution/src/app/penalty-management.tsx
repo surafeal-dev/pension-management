@@ -1,7 +1,7 @@
 // File: apps/contribution/src/app/penalty-management.tsx
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 import {
   Container,
   Stack,
@@ -17,9 +17,9 @@ import {
   ActionIcon,
   Modal,
   Textarea,
-} from "@mantine/core"
-import { useDisclosure } from "@mantine/hooks"
-import { DataTable } from "mantine-datatable"
+} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { DataTable } from 'mantine-datatable';
 import {
   IconSearch,
   IconFilter,
@@ -28,70 +28,78 @@ import {
   IconSend,
   IconHandOff,
   IconReceipt,
-} from "@tabler/icons-react"
+} from '@tabler/icons-react';
 
 const mockPenaltyData = [
   {
     id: 1,
-    employer: "Global Imports",
+    employer: 'Global Imports',
     amount: 410.5,
-    reason: "Late submission (3 days)",
-    status: "Outstanding",
-    date: "2024-10-18",
+    reason: 'Late submission (3 days)',
+    status: 'Outstanding',
+    date: '2024-10-18',
   },
   {
     id: 2,
-    employer: "Creative Minds Agency",
+    employer: 'Creative Minds Agency',
     amount: 250.0,
-    reason: "Incorrect amount",
-    status: "Outstanding",
-    date: "2024-10-15",
+    reason: 'Incorrect amount',
+    status: 'Outstanding',
+    date: '2024-10-15',
   },
   {
     id: 3,
-    employer: "BuildRight LLC",
+    employer: 'BuildRight LLC',
     amount: 500.0,
-    reason: "Late submission (5 days)",
-    status: "Paid",
-    date: "2024-09-20",
+    reason: 'Late submission (5 days)',
+    status: 'Paid',
+    date: '2024-09-20',
   },
   {
     id: 4,
-    employer: "Fast Logistics",
+    employer: 'Fast Logistics',
     amount: 150.0,
-    reason: "Late submission (1 day)",
-    status: "Waived",
-    date: "2024-09-16",
+    reason: 'Late submission (1 day)',
+    status: 'Waived',
+    date: '2024-09-16',
   },
-]
+];
 
 export default function PenaltyManagement() {
-  const [opened, { open, close }] = useDisclosure(false)
-  const [selectedPenalty, setSelectedPenalty] = useState<any>(null)
+  const [opened, { open, close }] = useDisclosure(false);
+  const [selectedPenalty, setSelectedPenalty] = useState<any>(null);
 
   const statusColors: Record<string, string> = {
-    Outstanding: "red",
-    Paid: "green",
-    Waived: "gray",
-  }
+    Outstanding: 'red',
+    Paid: 'green',
+    Waived: 'gray',
+  };
 
   const handleWaiveClick = (penalty: any) => {
-    setSelectedPenalty(penalty)
-    open()
-  }
+    setSelectedPenalty(penalty);
+    open();
+  };
 
   return (
     <Container size="xl" py="xl">
-      <Modal opened={opened} onClose={close} title={`Waive Penalty for ${selectedPenalty?.employer}`}>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={`Waive Penalty for ${selectedPenalty?.employer}`}
+      >
         <Stack>
           <Text>
-            You are about to waive a penalty of{" "}
+            You are about to waive a penalty of{' '}
             <Text span fw={700}>
               ${selectedPenalty?.amount.toFixed(2)}
-            </Text>{" "}
+            </Text>{' '}
             for {selectedPenalty?.employer}.
           </Text>
-          <Textarea label="Reason for Waiver" placeholder="e.g., First-time offense, system error..." required />
+          <Textarea
+            label="Reason for Waiver"
+            placeholder="e.g., First-time offense, system error..."
+            required
+          />
           <Group justify="flex-end">
             <Button variant="default" onClick={close}>
               Cancel
@@ -115,10 +123,14 @@ export default function PenaltyManagement() {
 
         {/* Filters */}
         <Group>
-          <TextInput placeholder="Search employers..." leftSection={<IconSearch size={16} />} style={{ flex: 1 }} />
+          <TextInput
+            placeholder="Search employers..."
+            leftSection={<IconSearch size={16} />}
+            style={{ flex: 1 }}
+          />
           <Select
             placeholder="Filter by status"
-            data={["Outstanding", "Paid", "Waived"]}
+            data={['Outstanding', 'Paid', 'Waived']}
             leftSection={<IconFilter size={16} />}
             clearable
           />
@@ -133,20 +145,20 @@ export default function PenaltyManagement() {
           records={mockPenaltyData}
           minHeight={200}
           columns={[
-            { accessor: "employer", title: "Employer", sortable: true },
-            { accessor: "date", title: "Offense Date", sortable: true },
-            { accessor: "reason", title: "Reason" },
+            { accessor: 'employer', title: 'Employer', sortable: true },
+            { accessor: 'date', title: 'Offense Date', sortable: true },
+            { accessor: 'reason', title: 'Reason' },
             {
-              accessor: "amount",
-              title: "Amount",
+              accessor: 'amount',
+              title: 'Amount',
               sortable: true,
-              textAlign: "right", // <-- FIX: Changed to textAlign
+              textAlign: 'right', // <-- FIX: Changed to textAlign
               render: ({ amount }) => `$${amount.toFixed(2)}`,
             },
             {
-              accessor: "status",
-              title: "Status",
-              textAlign: "center", // <-- FIX: Changed to textAlign
+              accessor: 'status',
+              title: 'Status',
+              textAlign: 'center', // <-- FIX: Changed to textAlign
               render: ({ status }) => (
                 <Badge color={statusColors[status]} variant="light">
                   {status}
@@ -154,26 +166,38 @@ export default function PenaltyManagement() {
               ),
             },
             {
-              accessor: "actions",
+              accessor: 'actions',
               title: <Text>Actions</Text>,
-              textAlign: "center", // <-- FIX: Changed to textAlign
+              textAlign: 'center', // <-- FIX: Changed to textAlign
               render: (record) => (
                 <Group gap={4} justify="center" wrap="nowrap">
                   <Menu shadow="md" width={200}>
                     <Menu.Target>
                       <ActionIcon variant="subtle" color="gray">
-                        <IconDotsVertical style={{ width: rem(16), height: rem(16) }} />
+                        <IconDotsVertical
+                          style={{ width: rem(16), height: rem(16) }}
+                        />
                       </ActionIcon>
                     </Menu.Target>
                     <Menu.Dropdown>
-                      {record.status === "Outstanding" && (
+                      {record.status === 'Outstanding' && (
                         <>
-                          <Menu.Item leftSection={<IconReceipt style={{ width: rem(14), height: rem(14) }} />}>
+                          <Menu.Item
+                            leftSection={
+                              <IconReceipt
+                                style={{ width: rem(14), height: rem(14) }}
+                              />
+                            }
+                          >
                             Mark as Paid
                           </Menu.Item>
                           <Menu.Item
                             color="orange"
-                            leftSection={<IconHandOff style={{ width: rem(14), height: rem(14) }} />}
+                            leftSection={
+                              <IconHandOff
+                                style={{ width: rem(14), height: rem(14) }}
+                              />
+                            }
                             onClick={() => handleWaiveClick(record)}
                           >
                             Request Waiver
@@ -181,14 +205,24 @@ export default function PenaltyManagement() {
                           <Menu.Divider />
                           <Menu.Item
                             color="blue"
-                            leftSection={<IconSend style={{ width: rem(14), height: rem(14) }} />}
+                            leftSection={
+                              <IconSend
+                                style={{ width: rem(14), height: rem(14) }}
+                              />
+                            }
                           >
                             Send Penalty Notification
                           </Menu.Item>
                         </>
                       )}
-                      {record.status !== "Outstanding" && (
-                        <Menu.Item leftSection={<IconCircleCheck style={{ width: rem(14), height: rem(14) }} />}>
+                      {record.status !== 'Outstanding' && (
+                        <Menu.Item
+                          leftSection={
+                            <IconCircleCheck
+                              style={{ width: rem(14), height: rem(14) }}
+                            />
+                          }
+                        >
                           View History
                         </Menu.Item>
                       )}
@@ -201,5 +235,5 @@ export default function PenaltyManagement() {
         />
       </Stack>
     </Container>
-  )
+  );
 }

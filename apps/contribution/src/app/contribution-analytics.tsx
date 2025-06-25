@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import {
   Card,
@@ -17,9 +17,9 @@ import {
   Progress,
   RingProgress,
   Center,
-} from "@mantine/core"
-import { DatePickerInput } from "@mantine/dates"
-import { LineChart, BarChart } from "@mantine/charts"
+} from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import { LineChart, BarChart } from '@mantine/charts';
 import {
   IconCalendar,
   IconTrendingUp,
@@ -27,8 +27,8 @@ import {
   IconAlertTriangle,
   IconDownload,
   IconFilter,
-} from "@tabler/icons-react"
-import { useState } from "react"
+} from '@tabler/icons-react';
+import { useState } from 'react';
 
 // Mock data for the analytics
 const mockData = {
@@ -38,44 +38,47 @@ const mockData = {
   missedContribution: 8500,
   contributionRate: 85,
   payoutGrowth: 12.5,
-}
+};
 
 // Mock chart data
 const contributionTrendData = [
-  { month: "Jan", expected: 4000, actual: 3800, missed: 200 },
-  { month: "Feb", expected: 4000, actual: 4000, missed: 0 },
-  { month: "Mar", expected: 4000, actual: 3500, missed: 500 },
-  { month: "Apr", expected: 4000, actual: 4200, missed: 0 },
-  { month: "May", expected: 4000, actual: 3900, missed: 100 },
-  { month: "Jun", expected: 4000, actual: 4100, missed: 0 },
-  { month: "Jul", expected: 4000, actual: 3600, missed: 400 },
-  { month: "Aug", expected: 4000, actual: 4000, missed: 0 },
-  { month: "Sep", expected: 4000, actual: 3750, missed: 250 },
-  { month: "Oct", expected: 4000, actual: 4050, missed: 0 },
-  { month: "Nov", expected: 4000, actual: 3900, missed: 100 },
-  { month: "Dec", expected: 4000, actual: 4000, missed: 0 },
-]
+  { month: 'Jan', expected: 4000, actual: 3800, missed: 200 },
+  { month: 'Feb', expected: 4000, actual: 4000, missed: 0 },
+  { month: 'Mar', expected: 4000, actual: 3500, missed: 500 },
+  { month: 'Apr', expected: 4000, actual: 4200, missed: 0 },
+  { month: 'May', expected: 4000, actual: 3900, missed: 100 },
+  { month: 'Jun', expected: 4000, actual: 4100, missed: 0 },
+  { month: 'Jul', expected: 4000, actual: 3600, missed: 400 },
+  { month: 'Aug', expected: 4000, actual: 4000, missed: 0 },
+  { month: 'Sep', expected: 4000, actual: 3750, missed: 250 },
+  { month: 'Oct', expected: 4000, actual: 4050, missed: 0 },
+  { month: 'Nov', expected: 4000, actual: 3900, missed: 100 },
+  { month: 'Dec', expected: 4000, actual: 4000, missed: 0 },
+];
 
 const payoutProjectionData = [
-  { year: "2024", amount: 125000 },
-  { year: "2025", amount: 140000 },
-  { year: "2026", amount: 157000 },
-  { year: "2027", amount: 176000 },
-  { year: "2028", amount: 198000 },
-  { year: "2029", amount: 222000 },
-  { year: "2030", amount: 250000 },
-]
+  { year: '2024', amount: 125000 },
+  { year: '2025', amount: 140000 },
+  { year: '2026', amount: 157000 },
+  { year: '2027', amount: 176000 },
+  { year: '2028', amount: 198000 },
+  { year: '2029', amount: 222000 },
+  { year: '2030', amount: 250000 },
+];
 
 const contributionBreakdownData = [
-  { name: "Regular Contributions", value: 75, color: "blue" },
-  { name: "Catch-up Contributions", value: 15, color: "green" },
-  { name: "Missed Contributions", value: 10, color: "red" },
-]
+  { name: 'Regular Contributions', value: 75, color: 'blue' },
+  { name: 'Catch-up Contributions', value: 15, color: 'green' },
+  { name: 'Missed Contributions', value: 10, color: 'red' },
+];
 
 export default function ContributionAnalytics() {
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
-  const [chartType, setChartType] = useState("line")
-  const [selectedPeriod, setSelectedPeriod] = useState("yearly")
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    null,
+    null,
+  ]);
+  const [chartType, setChartType] = useState('line');
+  const [selectedPeriod, setSelectedPeriod] = useState('yearly');
 
   return (
     <Container size="xl" py="xl">
@@ -108,7 +111,11 @@ export default function ContributionAnalytics() {
                 <IconTrendingUp size={20} color="green" />
               </Group>
               <Text fw={700} size="xl" c="green">
-                <NumberFormatter value={mockData.expectedYearlyPayout} prefix="$" thousandSeparator />
+                <NumberFormatter
+                  value={mockData.expectedYearlyPayout}
+                  prefix="$"
+                  thousandSeparator
+                />
               </Text>
               <Group mt="md" gap="xs">
                 <Badge color="green" variant="light" size="sm">
@@ -130,9 +137,18 @@ export default function ContributionAnalytics() {
                 <IconCalendar size={20} color="blue" />
               </Group>
               <Text fw={700} size="xl" c="blue">
-                <NumberFormatter value={mockData.expectedYearlyContribution} prefix="$" thousandSeparator />
+                <NumberFormatter
+                  value={mockData.expectedYearlyContribution}
+                  prefix="$"
+                  thousandSeparator
+                />
               </Text>
-              <Progress value={mockData.contributionRate} mt="md" size="sm" color="blue" />
+              <Progress
+                value={mockData.contributionRate}
+                mt="md"
+                size="sm"
+                color="blue"
+              />
               <Text size="xs" c="dimmed" mt="xs">
                 {mockData.contributionRate}% completed
               </Text>
@@ -148,7 +164,11 @@ export default function ContributionAnalytics() {
                 <IconTrendingDown size={20} color="orange" />
               </Group>
               <Text fw={700} size="xl" c="orange">
-                <NumberFormatter value={mockData.unfulfilledContribution} prefix="$" thousandSeparator />
+                <NumberFormatter
+                  value={mockData.unfulfilledContribution}
+                  prefix="$"
+                  thousandSeparator
+                />
               </Text>
               <Text size="xs" c="dimmed" mt="md">
                 Remaining to meet target
@@ -165,7 +185,11 @@ export default function ContributionAnalytics() {
                 <IconAlertTriangle size={20} color="red" />
               </Group>
               <Text fw={700} size="xl" c="red">
-                <NumberFormatter value={mockData.missedContribution} prefix="$" thousandSeparator />
+                <NumberFormatter
+                  value={mockData.missedContribution}
+                  prefix="$"
+                  thousandSeparator
+                />
               </Text>
               <Badge color="red" variant="light" size="sm" mt="md">
                 Requires Attention
@@ -191,22 +215,22 @@ export default function ContributionAnalytics() {
                   <Select
                     placeholder="Chart Type"
                     data={[
-                      { value: "line", label: "Line Chart" },
-                      { value: "bar", label: "Bar Chart" },
+                      { value: 'line', label: 'Line Chart' },
+                      { value: 'bar', label: 'Bar Chart' },
                     ]}
                     value={chartType}
-                    onChange={(value) => setChartType(value || "line")}
+                    onChange={(value) => setChartType(value || 'line')}
                     size="sm"
                   />
                   <Select
                     placeholder="Period"
                     data={[
-                      { value: "monthly", label: "Monthly" },
-                      { value: "quarterly", label: "Quarterly" },
-                      { value: "yearly", label: "Yearly" },
+                      { value: 'monthly', label: 'Monthly' },
+                      { value: 'quarterly', label: 'Quarterly' },
+                      { value: 'yearly', label: 'Yearly' },
                     ]}
                     value={selectedPeriod}
-                    onChange={(value) => setSelectedPeriod(value || "monthly")}
+                    onChange={(value) => setSelectedPeriod(value || 'monthly')}
                     size="sm"
                   />
                 </Group>
@@ -231,20 +255,20 @@ export default function ContributionAnalytics() {
                 </ActionIcon>
               </Group>
 
-              {chartType === "line" ? (
+              {chartType === 'line' ? (
                 <LineChart
                   h={300}
                   data={contributionTrendData}
                   dataKey="month"
                   series={[
-                    { name: "expected", color: "blue.6", label: "Expected" },
-                    { name: "actual", color: "green.6", label: "Actual" },
-                    { name: "missed", color: "red.6", label: "Missed" },
+                    { name: 'expected', color: 'blue.6', label: 'Expected' },
+                    { name: 'actual', color: 'green.6', label: 'Actual' },
+                    { name: 'missed', color: 'red.6', label: 'Missed' },
                   ]}
                   curveType="linear"
                   gridAxis="xy"
                   withLegend
-                  legendProps={{ verticalAlign: "bottom", height: 50 }}
+                  legendProps={{ verticalAlign: 'bottom', height: 50 }}
                 />
               ) : (
                 <BarChart
@@ -252,12 +276,12 @@ export default function ContributionAnalytics() {
                   data={contributionTrendData}
                   dataKey="month"
                   series={[
-                    { name: "expected", color: "blue.6", label: "Expected" },
-                    { name: "actual", color: "green.6", label: "Actual" },
-                    { name: "missed", color: "red.6", label: "Missed" },
+                    { name: 'expected', color: 'blue.6', label: 'Expected' },
+                    { name: 'actual', color: 'green.6', label: 'Actual' },
+                    { name: 'missed', color: 'red.6', label: 'Missed' },
                   ]}
                   withLegend
-                  legendProps={{ verticalAlign: "bottom", height: 50 }}
+                  legendProps={{ verticalAlign: 'bottom', height: 50 }}
                 />
               )}
             </Paper>
@@ -274,9 +298,21 @@ export default function ContributionAnalytics() {
                     size={180}
                     thickness={16}
                     sections={[
-                      { value: 75, color: "blue", tooltip: "Regular Contributions - 75%" },
-                      { value: 15, color: "green", tooltip: "Catch-up Contributions - 15%" },
-                      { value: 10, color: "red", tooltip: "Missed Contributions - 10%" },
+                      {
+                        value: 75,
+                        color: 'blue',
+                        tooltip: 'Regular Contributions - 75%',
+                      },
+                      {
+                        value: 15,
+                        color: 'green',
+                        tooltip: 'Catch-up Contributions - 15%',
+                      },
+                      {
+                        value: 10,
+                        color: 'red',
+                        tooltip: 'Missed Contributions - 10%',
+                      },
                     ]}
                     label={
                       <Center>
@@ -322,7 +358,7 @@ export default function ContributionAnalytics() {
                   h={200}
                   data={payoutProjectionData}
                   dataKey="year"
-                  series={[{ name: "amount", color: "violet.6" }]}
+                  series={[{ name: 'amount', color: 'violet.6' }]}
                   curveType="monotone"
                   withDots={false}
                   gridAxis="y"
@@ -371,14 +407,21 @@ export default function ContributionAnalytics() {
                 Recommendations
               </Title>
               <Stack gap="sm">
-                <Text size="sm">• Consider increasing monthly contributions by $200 to meet yearly target</Text>
-                <Text size="sm">• Set up automatic contributions to avoid missed payments</Text>
-                <Text size="sm">• Review catch-up contribution opportunities for tax benefits</Text>
+                <Text size="sm">
+                  • Consider increasing monthly contributions by $200 to meet
+                  yearly target
+                </Text>
+                <Text size="sm">
+                  • Set up automatic contributions to avoid missed payments
+                </Text>
+                <Text size="sm">
+                  • Review catch-up contribution opportunities for tax benefits
+                </Text>
               </Stack>
             </Card>
           </Grid.Col>
         </Grid>
       </Stack>
     </Container>
-  )
+  );
 }

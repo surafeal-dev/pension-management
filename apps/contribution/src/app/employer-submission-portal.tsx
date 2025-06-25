@@ -1,7 +1,7 @@
 // File: apps/contribution/src/app/employer-submission-portal.tsx
-"use client"
+'use client';
 
-import { useState } from "react"
+import { useState } from 'react';
 import {
   Container,
   Stack,
@@ -16,30 +16,38 @@ import {
   Table,
   NumberFormatter,
   Card, // <-- FIX: Added Card to imports
-} from "@mantine/core"
-import { Dropzone, FileWithPath } from "@mantine/dropzone"
-import { IconUpload, IconFileCheck, IconCreditCard, IconCircleCheck, IconX } from "@tabler/icons-react"
+} from '@mantine/core';
+import { Dropzone, FileWithPath } from '@mantine/dropzone';
+import {
+  IconUpload,
+  IconFileCheck,
+  IconCreditCard,
+  IconCircleCheck,
+  IconX,
+} from '@tabler/icons-react';
 
 // Mock data that would be parsed from the uploaded file
 const mockParsedData = {
   employees: [
-    { id: "E101", name: "Alice Johnson", salary: 75000, contribution: 600 },
-    { id: "E102", name: "Bob Williams", salary: 82000, contribution: 656 },
-    { id: "E103", name: "Charlie Brown", salary: 65000, contribution: 520 },
+    { id: 'E101', name: 'Alice Johnson', salary: 75000, contribution: 600 },
+    { id: 'E102', name: 'Bob Williams', salary: 82000, contribution: 656 },
+    { id: 'E103', name: 'Charlie Brown', salary: 65000, contribution: 520 },
   ],
   summary: {
     totalEmployees: 152,
     totalSalary: 11_400_000,
     totalContribution: 91_200,
   },
-}
+};
 
 export default function EmployerSubmissionPortal() {
-  const [active, setActive] = useState(0)
-  const [files, setFiles] = useState<FileWithPath[]>([])
+  const [active, setActive] = useState(0);
+  const [files, setFiles] = useState<FileWithPath[]>([]);
 
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current))
-  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current))
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
 
   const tableRows = mockParsedData.employees.map((emp) => (
     <Table.Tr key={emp.id}>
@@ -49,10 +57,14 @@ export default function EmployerSubmissionPortal() {
         <NumberFormatter value={emp.salary} prefix="$" thousandSeparator />
       </Table.Td>
       <Table.Td fw={700}>
-        <NumberFormatter value={emp.contribution} prefix="$" thousandSeparator />
+        <NumberFormatter
+          value={emp.contribution}
+          prefix="$"
+          thousandSeparator
+        />
       </Table.Td>
     </Table.Tr>
-  ))
+  ));
 
   return (
     <Container size="lg" py="xl">
@@ -68,23 +80,46 @@ export default function EmployerSubmissionPortal() {
 
         <Paper withBorder shadow="sm" p="xl" radius="md">
           <Stepper active={active} onStepClick={setActive}>
-            <Stepper.Step label="Upload" description="Upload payroll file" icon={<IconUpload size={18} />}>
+            <Stepper.Step
+              label="Upload"
+              description="Upload payroll file"
+              icon={<IconUpload size={18} />}
+            >
               <Text size="lg" fw={500} mb="md">
                 Step 1: Upload Payroll Data
               </Text>
               <Text c="dimmed" mb="xl">
-                Please upload your payroll report for the current contribution period. Accepted formats: CSV, XLSX.
+                Please upload your payroll report for the current contribution
+                period. Accepted formats: CSV, XLSX.
               </Text>
-              <Dropzone onDrop={setFiles} onReject={(files) => console.log("rejected files", files)} maxSize={5 * 1024 ** 2}>
-                <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: "none" }}>
+              <Dropzone
+                onDrop={setFiles}
+                onReject={(files) => console.log('rejected files', files)}
+                maxSize={5 * 1024 ** 2}
+              >
+                <Group
+                  justify="center"
+                  gap="xl"
+                  mih={220}
+                  style={{ pointerEvents: 'none' }}
+                >
                   <Dropzone.Accept>
-                    <IconUpload style={{ width: rem(52), height: rem(52) }} stroke={1.5} />
+                    <IconUpload
+                      style={{ width: rem(52), height: rem(52) }}
+                      stroke={1.5}
+                    />
                   </Dropzone.Accept>
                   <Dropzone.Reject>
-                    <IconX style={{ width: rem(52), height: rem(52) }} stroke={1.5} />
+                    <IconX
+                      style={{ width: rem(52), height: rem(52) }}
+                      stroke={1.5}
+                    />
                   </Dropzone.Reject>
                   <Dropzone.Idle>
-                    <IconFileCheck style={{ width: rem(52), height: rem(52) }} stroke={1.5} />
+                    <IconFileCheck
+                      style={{ width: rem(52), height: rem(52) }}
+                      stroke={1.5}
+                    />
                   </Dropzone.Idle>
                   <div>
                     <Text size="xl" inline>
@@ -98,12 +133,17 @@ export default function EmployerSubmissionPortal() {
               </Dropzone>
             </Stepper.Step>
 
-            <Stepper.Step label="Verify" description="Review data" icon={<IconFileCheck size={18} />}>
+            <Stepper.Step
+              label="Verify"
+              description="Review data"
+              icon={<IconFileCheck size={18} />}
+            >
               <Text size="lg" fw={500} mb="md">
                 Step 2: Review and Verify
               </Text>
               <Text c="dimmed" mb="xl">
-                Please verify the summary and a sample of the employee data parsed from your file.
+                Please verify the summary and a sample of the employee data
+                parsed from your file.
               </Text>
               <Paper withBorder p="md" radius="sm" mb="lg">
                 <Group justify="space-around">
@@ -120,7 +160,11 @@ export default function EmployerSubmissionPortal() {
                       Total Monthly Salary
                     </Text>
                     <Text fw={700} size="xl">
-                      <NumberFormatter value={mockParsedData.summary.totalSalary} prefix="$" thousandSeparator />
+                      <NumberFormatter
+                        value={mockParsedData.summary.totalSalary}
+                        prefix="$"
+                        thousandSeparator
+                      />
                     </Text>
                   </div>
                   <div>
@@ -128,7 +172,11 @@ export default function EmployerSubmissionPortal() {
                       Total Contribution Due
                     </Text>
                     <Text fw={700} size="xl" c="blue">
-                      <NumberFormatter value={mockParsedData.summary.totalContribution} prefix="$" thousandSeparator />
+                      <NumberFormatter
+                        value={mockParsedData.summary.totalContribution}
+                        prefix="$"
+                        thousandSeparator
+                      />
                     </Text>
                   </div>
                 </Group>
@@ -146,7 +194,11 @@ export default function EmployerSubmissionPortal() {
               </Table>
             </Stepper.Step>
 
-            <Stepper.Step label="Payment" description="Submit payment" icon={<IconCreditCard size={18} />}>
+            <Stepper.Step
+              label="Payment"
+              description="Submit payment"
+              icon={<IconCreditCard size={18} />}
+            >
               <Text size="lg" fw={500} mb="md">
                 Step 3: Confirm and Pay
               </Text>
@@ -158,7 +210,11 @@ export default function EmployerSubmissionPortal() {
                 <Group justify="space-between" mt="md">
                   <Text>Total Contribution Amount</Text>
                   <Text fw={700} size="lg">
-                    <NumberFormatter value={mockParsedData.summary.totalContribution} prefix="$" thousandSeparator />
+                    <NumberFormatter
+                      value={mockParsedData.summary.totalContribution}
+                      prefix="$"
+                      thousandSeparator
+                    />
                   </Text>
                 </Group>
                 <Group justify="space-between" mt="xs" mb="xl">
@@ -175,19 +231,28 @@ export default function EmployerSubmissionPortal() {
             </Stepper.Step>
 
             <Stepper.Completed>
-              <Center style={{ flexDirection: "column" }} h={300}>
-                <IconCircleCheck size={80} color="var(--mantine-color-green-6)" />
+              <Center style={{ flexDirection: 'column' }} h={300}>
+                <IconCircleCheck
+                  size={80}
+                  color="var(--mantine-color-green-6)"
+                />
                 <Title order={2} mt="md">
                   Submission Complete!
                 </Title>
                 <Text c="dimmed" mt="xs">
-                  Your contribution of{" "}
+                  Your contribution of{' '}
                   <Text span fw={700}>
-                    <NumberFormatter value={mockParsedData.summary.totalContribution} prefix="$" thousandSeparator />
-                  </Text>{" "}
+                    <NumberFormatter
+                      value={mockParsedData.summary.totalContribution}
+                      prefix="$"
+                      thousandSeparator
+                    />
+                  </Text>{' '}
                   has been submitted.
                 </Text>
-                <Text c="dimmed">A confirmation email has been sent to you.</Text>
+                <Text c="dimmed">
+                  A confirmation email has been sent to you.
+                </Text>
                 <Button mt="xl" onClick={() => setActive(0)}>
                   Submit Another Contribution
                 </Button>
@@ -203,12 +268,12 @@ export default function EmployerSubmissionPortal() {
             )}
             {active < 3 && (
               <Button onClick={nextStep}>
-                {active === 2 ? "Confirm & Proceed to Payment" : "Next step"}
+                {active === 2 ? 'Confirm & Proceed to Payment' : 'Next step'}
               </Button>
             )}
           </Group>
         </Paper>
       </Stack>
     </Container>
-  )
+  );
 }
