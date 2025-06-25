@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink as RouterNavLink, Outlet, useLocation, Link } from 'react-router-dom';
 import {
   AppShell,
   Text,
@@ -7,20 +8,11 @@ import {
   Box,
   Container,
   Title,
-  Paper,
   Stack,
   rem,
   NavLink,
-  SimpleGrid,
-  Tabs,
 } from '@mantine/core';
 import { IconChartLine } from '@tabler/icons-react';
-import DashboardOverview from './components/DashboardOverview';
-import AssetAllocation from './components/AssetAllocation';
-import PortfolioHoldings from './components/PortfolioHoldings';
-import RecentTransactions from './components/RecentTransactions';
-import ContributionHistory from './components/ContributionHistory';
-import RetirementPlanning from './components/RetirementPlanning';
 
 // SVG Icons with size prop
 type IconProps = {
@@ -75,205 +67,104 @@ const DemoPage = () => {
   
   return (
     <AppShell
-      header={{ height: 60 }}
       navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
       padding="md"
     >
-      <AppShell.Header>
-        <Group h="100%" px="md" justify="space-between">
-          <Group>
-            <Box style={{ cursor: 'pointer' }} onClick={() => setOpened(!opened)}>
-              <MenuIcon />
-            </Box>
-            <Title order={4} fw={700}>
-              Pension Management
-            </Title>
-          </Group>
-          <Group>
-            <Box style={{ cursor: 'pointer' }}>
-              <BellIcon />
-            </Box>
-            <Avatar 
-              src={null} 
-              alt="User" 
-              color="blue" 
-              radius="xl"
-            >
-              JD
-            </Avatar>
-          </Group>
-        </Group>
-      </AppShell.Header>
 
       <AppShell.Navbar p="md">
         <Stack gap={4}>
-          <NavLink
-            label="Dashboard"
-            leftSection={<DashboardIcon />}
-            variant="filled"
-            active
-            styles={{
-              root: { 
-                borderRadius: 'var(--mantine-radius-md)',
-                '&[data-active]': {
-                  backgroundColor: 'var(--mantine-primary-color-light)',
-                  color: 'var(--mantine-primary-color-light-color)',
-                },
-                '&:hover': {
-                  backgroundColor: 'var(--mantine-primary-color-light-hover)',
-                },
-              },
-              label: { 
-                fontWeight: 600,
-                fontSize: 'var(--mantine-font-size-sm)',
-              },
-            }}
-          />
-          <NavLink 
-            label="Investments" 
-            leftSection={<InvestmentsIcon />}
-            variant="subtle"
-            styles={{
-              root: { 
-                borderRadius: 'var(--mantine-radius-md)',
-                '&:hover': {
-                  backgroundColor: 'var(--mantine-color-gray-1)',
-                },
-              },
-              label: { 
-                fontWeight: 500,
-                fontSize: 'var(--mantine-font-size-sm)',
-              },
-            }}
-          />
-          <NavLink 
-            label="Transactions" 
-            leftSection={<TransactionsIcon />}
-            variant="subtle"
-            styles={{
-              root: { 
-                borderRadius: 'var(--mantine-radius-md)',
-                '&:hover': {
-                  backgroundColor: 'var(--mantine-color-gray-1)',
-                },
-              },
-              label: { 
-                fontWeight: 500,
-                fontSize: 'var(--mantine-font-size-sm)',
-              },
-            }}
-          />
-          <NavLink 
-            label="Reports" 
-            leftSection={<ReportsIcon />}
-            variant="subtle"
-            styles={{
-              root: { 
-                borderRadius: 'var(--mantine-radius-md)',
-                '&:hover': {
-                  backgroundColor: 'var(--mantine-color-gray-1)',
-                },
-              },
-              label: { 
-                fontWeight: 500,
-                fontSize: 'var(--mantine-font-size-sm)',
-              },
-            }}
-          />
+          <RouterNavLink
+            to="."
+            style={({ isActive }) => ({
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px 15px',
+              borderRadius: 'var(--mantine-radius-md)',
+              textDecoration: 'none',
+              color: isActive ? 'var(--mantine-primary-color-light-color)' : 'inherit',
+              backgroundColor: isActive ? 'var(--mantine-primary-color-light)' : 'transparent',
+              fontWeight: isActive ? 600 : 500,
+              fontSize: 'var(--mantine-font-size-sm)',
+            })}
+          >
+            <span style={{ marginRight: '10px' }}><DashboardIcon /></span>
+            <span>Dashboard</span>
+          </RouterNavLink>
+          <RouterNavLink
+            to="investments"
+            style={({ isActive }) => ({
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px 15px',
+              borderRadius: 'var(--mantine-radius-md)',
+              textDecoration: 'none',
+              color: isActive ? 'var(--mantine-primary-color-light-color)' : 'inherit',
+              backgroundColor: isActive ? 'var(--mantine-primary-color-light)' : 'transparent',
+              fontWeight: isActive ? 600 : 500,
+              fontSize: 'var(--mantine-font-size-sm)',
+            })}
+          >
+            <span style={{ marginRight: '10px' }}><InvestmentsIcon /></span>
+            <span>Investments</span>
+          </RouterNavLink>
+          <RouterNavLink
+            to="transactions"
+            style={({ isActive }) => ({
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px 15px',
+              borderRadius: 'var(--mantine-radius-md)',
+              textDecoration: 'none',
+              color: isActive ? 'var(--mantine-primary-color-light-color)' : 'inherit',
+              backgroundColor: isActive ? 'var(--mantine-primary-color-light)' : 'transparent',
+              fontWeight: isActive ? 600 : 500,
+              fontSize: 'var(--mantine-font-size-sm)',
+            })}
+          >
+            <span style={{ marginRight: '10px' }}><TransactionsIcon /></span>
+            <span>Transactions</span>
+          </RouterNavLink>
+          <RouterNavLink
+            to="planning"
+            style={({ isActive }) => ({
+              display: 'flex',
+              alignItems: 'center',
+              padding: '10px 15px',
+              borderRadius: 'var(--mantine-radius-md)',
+              textDecoration: 'none',
+              color: isActive ? 'var(--mantine-primary-color-light-color)' : 'inherit',
+              backgroundColor: isActive ? 'var(--mantine-primary-color-light)' : 'transparent',
+              fontWeight: isActive ? 600 : 500,
+              fontSize: 'var(--mantine-font-size-sm)',
+            })}
+          >
+            <span style={{ marginRight: '10px' }}><IconChartLine /></span>
+            <span>Planning</span>
+          </RouterNavLink>
           <Box mt="auto" pt="md">
-            <NavLink 
-              label="Settings" 
-              leftSection={<SettingsIcon />}
-              variant="subtle"
-              styles={{
-                root: { 
-                  borderRadius: 'var(--mantine-radius-md)',
-                  '&:hover': {
-                    backgroundColor: 'var(--mantine-color-gray-1)',
-                  },
-                },
-                label: { 
-                  fontWeight: 500,
-                  fontSize: 'var(--mantine-font-size-sm)',
-                },
-              }}
-            />
+            <RouterNavLink
+              to="settings"
+              style={({ isActive }) => ({
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px 15px',
+                borderRadius: 'var(--mantine-radius-md)',
+                textDecoration: 'none',
+                color: isActive ? 'var(--mantine-primary-color-light-color)' : 'inherit',
+                backgroundColor: isActive ? 'var(--mantine-primary-color-light)' : 'transparent',
+                fontWeight: isActive ? 600 : 500,
+                fontSize: 'var(--mantine-font-size-sm)',
+              })}
+            >
+              <span style={{ marginRight: '10px' }}><SettingsIcon /></span>
+              <span>Settings</span>
+            </RouterNavLink>
           </Box>
         </Stack>
       </AppShell.Navbar>
 
       <AppShell.Main>
-        <Container size="lg">
-          <Stack gap="xl">
-            <Box>
-              <Title order={2} fw={700} mb="xs">Welcome back, John</Title>
-              <Text c="dimmed" mb="md">Here's what's happening with your pension today</Text>
-            </Box>
-            
-            <Tabs defaultValue="overview">
-              <Tabs.List>
-                <Tabs.Tab value="overview" leftSection={<DashboardIcon size={16} />}>
-                  Overview
-                </Tabs.Tab>
-                <Tabs.Tab value="investments" leftSection={<InvestmentsIcon size={16} />}>
-                  Investments
-                </Tabs.Tab>
-                <Tabs.Tab value="transactions" leftSection={<TransactionsIcon size={16} />}>
-                  Transactions
-                </Tabs.Tab>
-                <Tabs.Tab value="planning" leftSection={<IconChartLine size={16} />}>
-                  Planning
-                </Tabs.Tab>
-              </Tabs.List>
-
-              <Tabs.Panel value="overview" pt="md">
-                <Stack gap="xl">
-                  <DashboardOverview />
-                  
-                  <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
-                    <AssetAllocation />
-                    <Box>
-                      <Title order={4} mb="md">Investment Distribution</Title>
-                      <Text c="dimmed" size="sm">Your investments are diversified across different asset classes to balance risk and return.</Text>
-                      <Text c="dimmed" size="sm" mt="md">
-                        <Text component="span" fw={500}>Stocks</Text> provide growth potential but come with higher risk.
-                      </Text>
-                      <Text c="dimmed" size="sm">
-                        <Text component="span" fw={500}>Bonds</Text> offer more stability and regular income.
-                      </Text>
-                      <Text c="dimmed" size="sm">
-                        <Text component="span" fw={500}>Real Estate</Text> provides diversification and potential for appreciation.
-                      </Text>
-                    </Box>
-                  </SimpleGrid>
-                  
-                  <PortfolioHoldings />
-                </Stack>
-              </Tabs.Panel>
-
-              <Tabs.Panel value="investments" pt="md">
-                <Stack gap="md">
-                  <Title order={3} mb="md">Investment Portfolio</Title>
-                  <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md">
-                    <AssetAllocation />
-                    <PortfolioHoldings />
-                  </SimpleGrid>
-                </Stack>
-              </Tabs.Panel>
-
-              <Tabs.Panel value="transactions" pt="md">
-                <Stack gap="md">
-                  <ContributionHistory />
-                  <RecentTransactions />
-                </Stack>
-              </Tabs.Panel>
-
-              <Tabs.Panel value="planning" pt="md">
-                <RetirementPlanning />
-              </Tabs.Panel>
-            </Tabs>
-          </Stack>
-        </Container>
+        <Outlet />
       </AppShell.Main>
     </AppShell>
   );

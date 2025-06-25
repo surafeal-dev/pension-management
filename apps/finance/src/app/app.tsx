@@ -1,6 +1,14 @@
 import { MantineProvider, createTheme } from '@mantine/core';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import '@mantine/core/styles.css';
-import DemoPage from './DemoPage'; // Import the new DemoPage
+
+// Import layout and pages
+import DemoPage from './DemoPage';
+import DashboardPage from './pages/DashboardPage';
+import InvestmentsPage from './pages/InvestmentsPage';
+import TransactionsPage from './pages/TransactionsPage';
+import PlanningPage from './pages/PlanningPage';
+import SettingsPage from './pages/SettingsPage';
 
 // Create a custom theme
 const theme = createTheme({
@@ -11,7 +19,16 @@ const theme = createTheme({
 export function App() {
   return (
     <MantineProvider theme={theme}>
-      <DemoPage />
+      <Routes>
+        <Route path="/" element={<DemoPage />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="investments" element={<InvestmentsPage />} />
+          <Route path="transactions" element={<TransactionsPage />} />
+          <Route path="planning" element={<PlanningPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
     </MantineProvider>
   );
 }
