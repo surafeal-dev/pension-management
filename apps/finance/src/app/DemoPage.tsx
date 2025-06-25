@@ -67,35 +67,9 @@ const DemoPage = () => {
   
   return (
     <AppShell
-      header={{ height: 60 }}
       navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
       padding="md"
     >
-      <AppShell.Header>
-        <Group h="100%" px="md" justify="space-between">
-          <Group>
-            <Box style={{ cursor: 'pointer' }} onClick={() => setOpened(!opened)}>
-              <MenuIcon />
-            </Box>
-            <Title order={4} fw={700}>
-              Pension Management
-            </Title>
-          </Group>
-          <Group>
-            <Box style={{ cursor: 'pointer' }}>
-              <BellIcon />
-            </Box>
-            <Avatar 
-              src={null} 
-              alt="User" 
-              color="blue" 
-              radius="xl"
-            >
-              JD
-            </Avatar>
-          </Group>
-        </Group>
-      </AppShell.Header>
 
       <AppShell.Navbar p="md">
         <Stack gap={4}>
