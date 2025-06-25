@@ -135,7 +135,7 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <DashboardLayout
-              headerContent={<Text size="xl">Contribution Dashboard</Text>}
+              headerContent={<Text size="xl">Contribution DashboardD</Text>}
               user={{
                 name: 'Admin User',
                 email: 'admin@example.com',
